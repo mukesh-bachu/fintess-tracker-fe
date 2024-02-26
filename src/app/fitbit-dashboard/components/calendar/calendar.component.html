@@ -1,0 +1,32 @@
+<div class="calendar-navigation">
+    <button (click)="goToPreviousMonth()">Previous</button>
+    <span>{{ currentMonth | date: 'MMMM y' }}</span>
+    <button (click)="goToNextMonth()" *ngIf="currentMonth < today">Next</button>
+  </div>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let week of weeks">
+        <td *ngFor="let day of week">
+          <div *ngIf="day.date">
+            {{ day.date | date: 'd' }}
+            <div *ngIf="day.steps > 0">
+              Steps: {{ day.steps }}
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  

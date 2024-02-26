@@ -1,0 +1,83 @@
+<div class="login-body">
+    <div class="login-panel"></div>
+
+    <div class="login-content">
+        <img  class = "mb-5" src="../../assets/layout/images/miracle-logo-dark.png" alt="babylon-layout"/>
+        <h1><span>Sign Up</span> for Miracle Fitness Tracker</h1>
+        <p>Welcome, please use the form to sign-up.</p>
+        
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <div class="login-input-wrapper">
+            <!--First Name -->
+            <div class="p-field">
+                <label htmlFor="firstName" class="p-sr-only">First Name</label>
+                <input pInputText id="firstName" type="text" placeholder="First Name"  formControlName="firstName"/>
+                <small *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="p-error">First Name is required and should be at least 2 characters</small>
+            </div>
+		</div>
+
+        <div class="login-input-wrapper">
+            <!--Last Name -->
+            <div class="field">
+                <label htmlFor="lastName" class="p-sr-only">Last Name</label>
+                <input pInputText id="lastName" type="text" placeholder="Last Name"  formControlName="lastName"/>
+                <small *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="p-error">Last Name is required and should be at least 2 characters</small>
+            </div>
+		</div>
+
+        <div class="login-input-wrapper">
+            <!-- Phone Number -->
+            <div class="field">
+                <label htmlFor="phone" class="p-sr-only">Phone Number</label>
+                <input pInputText id="phone" type="tel" placeholder="Phone Number"  formControlName="phone"/>
+                <small *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="p-error">Phone number is required and must be numeric.</small>
+            </div>
+		</div>
+
+        <div class="login-input-wrapper">
+            <!-- Email -->
+            <div class="field">
+                <label htmlFor="email" class="p-sr-only">Email</label>
+                <input pInputText id="email" type="email" placeholder="Email"  formControlName="email"/>
+                <small *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="p-error">A valid email is required.</small>
+            </div>
+		</div>
+
+        <div class="login-input-wrapper">
+            <!-- Password -->
+            <div class="field">
+                <label htmlFor="password" class="p-sr-only">Password</label>
+                <input pInputText id="password" type="password" placeholder="Password"  formControlName="password"/>
+                
+                <small *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched" class="p-error">Password is required and must be at least 6 characters long.</small>
+            </div>
+		</div>
+
+        <div class="login-input-wrapper">
+            <!-- Confirm Password -->
+            <div class="field">
+                <label htmlFor="confirmPassword" class="p-sr-only">Confirm Password</label>
+                <input pInputText id="confirmPassword" type="password" placeholder="Confirm Password"  formControlName="confirmPassword"/>
+                <small *ngIf="signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched" class="p-error">Confirm password is required.</small>
+                <small *ngIf="signupForm.errors?.['passwordMismatch'] && signupForm.get('confirmPassword')?.touched" class="p-error">Passwords do not match.</small>
+            </div>
+		</div>
+
+
+        <div class = "m-1">
+            <span class="text-600 font-medium">Already have an account?</span>
+            <a class="font-medium no-underline mb-2 ml-2 text-blue-500 cursor-pointer" routerLink="/mft/login">Sign in!</a>
+        </div>
+
+        <!-- Submit Button -->
+        <button pButton type="submit" label="Submit"></button>
+
+        <!-- Response Message -->
+        <div *ngIf="responseMessage" class="response-message mt-3">
+            {{ responseMessage }}
+
+            <a class="font-medium no-underline mb-2 ml-2 text-blue-500 cursor-pointer" routerLink="/mft/login">Sign in!</a>
+        </div>
+    </form>              
+    </div>
+</div>

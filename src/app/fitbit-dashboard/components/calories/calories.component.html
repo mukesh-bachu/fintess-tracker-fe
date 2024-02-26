@@ -1,0 +1,30 @@
+
+<div class="chart-nav-container">
+  <h4>Calories</h4>
+  <div class="custom-dropdown">
+    
+    <!-- <span>Select Chart Type: </span>
+    <p-dropdown [options]="chartOptions" [(ngModel)]="selectedChartType" (onChange)="onChartTypeChange($event)" class="custom-dropdown"></p-dropdown> -->
+    <div class="chart-type-selectors">
+      <i class="pi pi-chart-bar mr-3" style="font-size: 1rem" (click)="onChartTypeChange('bar')" [ngClass]="{'selected-chart': selectedChartType === 'bar'}"></i>
+      <i class="pi pi-chart-line mr-3" style="font-size: 1rem" (click)="onChartTypeChange('line')" [ngClass]="{'selected-chart': selectedChartType === 'line'}"></i>
+      <!-- <i class="pi pi-chart-pie" style="font-size: 1rem" (click)="onChartTypeChange('pie')" [ngClass]="{'selected-chart': selectedChartType === 'pie'}"></i> -->
+    </div>
+  </div>
+</div>
+<div >
+  <div style="display: flex; justify-content: flex-end;">
+    <i class="pi pi-angle-left chart-nav-icon" (click)="changeWeek(-1)" style="font-size: 1.75rem"></i>
+    <i class="pi pi-angle-right chart-nav-icon {{ isCurrentWeek ? 'disabled-icon' : '' }}" style="font-size: 1.75rem" (click)="!isCurrentWeek && changeWeek(1)"></i>
+    
+  </div>
+  <!-- <canvas #chartCanvas  ></canvas> -->
+  <!-- <canvas #chartCanvas *ngIf="isDataAvaiable" style="width: 470px; height: 210px;"    ></canvas> -->
+  <div   style="width:30rem">
+    <p-chart *ngIf = "isDataAvaiable" [type]="basicType" [data]="basicData" [options]="basicOptions" ></p-chart>
+    <img id="layout-topbar-logo" *ngIf="!isDataAvaiable" src="assets/layout/images/nodata4.png" style="width: 420px; height: 210px;" alt="babylon-layout"/>
+</div>
+
+  <!-- <p-chart type="selectedChartType" [data]="chart.data" [options]="chart.options" [style]="{'width': '50%'}"></p-chart> -->
+</div>
+ 

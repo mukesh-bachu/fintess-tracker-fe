@@ -1,0 +1,47 @@
+<div class="layout-topbar ">
+    <a href="#" class="layout-topbar-logo">
+        <img id="layout-topbar-logo" src="assets/layout/images/logo-white.png" alt="babylon-layout"/>
+    </a>
+
+    <ul class="topbar-menu fadeInDown" [ngClass]="{'topbar-menu-visible': appMain.topbarMenuActive}">
+
+        <!-- <span #username class="topbar-item-name username" *ngIf="userIsAuthenticated && app.profileMode==='popup'||appMain.isHorizontal()"
+        [ngClass]="{'active-topmenuitem':appMain.activeTopbarItem === username}"
+        >{{ userFirstName+' '+userLastname }}</span>
+        <li #profile class="user-profile"
+            *ngIf="userIsAuthenticated && app.profileMode==='popup'||appMain.isHorizontal()"
+            [ngClass]="{'active-topmenuitem':appMain.activeTopbarItem === profile}">
+
+            <a href="#" (click)="appMain.onTopbarItemClick($event,profile)">
+                <img alt="babylon-layout" src="assets/layout/images/avatar-john.png"/>
+            </a>
+
+            <ul class="fadeInDown">
+                <li role="menuitem">
+                    <a href="#" (click)="logout()">
+                        <i class="pi pi-user"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul> 
+        </li> -->
+
+        <div class = " d-flex justify-content-end m-5 m-auto" *ngIf="userIsAuthenticated">
+        
+            <p-button label = "{{ userFirstName+' '+userLastname }}" icon="pi pi-fw pi-user" ></p-button>
+            
+            <p-button label="Logout" (onClick)="logout()" icon="pi pi-fw pi-sign-out"  ></p-button>
+            
+        </div>
+
+    </ul>
+ 
+</div>
+  
+
+
+
+
+
+
+

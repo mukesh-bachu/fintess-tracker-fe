@@ -1,0 +1,389 @@
+
+<div class="card col-12  lg:col-10 m-auto">
+    <p-tabView styleClass="tabview-custom" (onChange)="onTabChange($event)">
+        <p-tabPanel>
+            <ng-template pTemplate="header">
+                <i class="pi pi-home mr-2"></i>
+                <span>Dashboard</span>
+            </ng-template>
+
+            <div class="col-12  m-auto">
+                <div class=" full-screen-card p-grid p-justify-center p-align-center">
+                    <div class="p-col-12 p-md-6 p-lg-4 m-1">
+                        <div class="header surface-card p-4 shadow-2 border-round">
+                            <!-- Your card content goes here -->
+                            <div class="grid">
+
+                                <div class="m-5 m-auto">
+                                    <!-- Dropdown for Login Options -->
+                                    <p-dropdown [options]="loginOptions" [(ngModel)]="selectedLoginMethod"
+                                                placeholder="Select Login Method" (onChange)="onLogin($event.value)" 
+                                                optionLabel="label" style="width: 100px  !important;"></p-dropdown>
+                                </div>
+                                
+                                <div class="col-12 md:col-6 lg:col-3">
+                                    <div class="clickable-card  surface-card shadow-3 p-3 border-round">
+            
+                                        <div class="flex justify-content-between mb-3">
+                                            <div>
+                                                <span class="block text-500 font-medium mb-3"></span>
+                                                <div class="text-900 font-medium text-xl">Steps</div>
+                                            </div>
+                                        </div>
+                
+                                        <span class="text-green-500 font-medium text-xl">{{ stepsToday }} Steps </span>
+                                        <span class="text-500">completed today</span>
+                                    </div>
+                                </div>
+                
+                                <div class="col-12 md:col-6 lg:col-3">
+                                    <div class="clickable-card surface-card shadow-3 p-3 border-round">
+                                        <div class="flex justify-content-between mb-3">
+                                            <div>
+                                                <span class="block text-500 font-medium mb-3"></span>
+                                                <div class="text-900 font-medium text-xl">Calories</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-green-500 font-medium text-xl">{{caloriesToday}} Calories</span>
+                                        <span class="text-500"> burnt today</span>
+                                    </div>
+                                </div>
+                
+                                <div class="col-12 md:col-6 lg:col-3">
+                                    <div class="clickable-card surface-card shadow-3 p-3 border-round">
+                                        <div class="flex justify-content-between mb-3">
+                                            <div>
+                                                <span class="block text-500 font-medium mb-3"></span>
+                                                <div class="text-900 font-medium text-xl">Height / Weight</div>
+                                            </div>
+                                        </div>
+                                        <span class="text-green-500 font-medium text-xl">{{ height }} / {{ weight }}</span>
+                                        <!-- <span class="text-500"> Normal Level</span> -->
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex sm:flex-wrap  md:flex-wrap">
+   
+                    <div class="col-12 lg:col-6">
+                        <div class=" p-grid p-justify-center p-align-center">
+                            <div class="p-col-12 p-md-6 p-lg-6">
+                                <div class="card header p-2 shadow-2 border-round" style="height: 50rem;">
+                                    <div >
+                                        <div class="grid flex-column p-fluid p-2 ">
+                                            <!-- <div class="flex flex-row">
+                                                <div class="card col-6 mr-1">
+                                                    <app-steps></app-steps>
+                                                </div>
+                                                <div class="card  col-6">
+                                                    <app-steps></app-steps>
+                                                </div>
+                                            </div> -->
+                                                
+                                            <div class="card grid min-h-full justify-content-center m-1">
+                                                <app-steps></app-steps>
+                                            </div>
+                            
+                                            <div class="card grid  justify-content-center m-1 mt-2">
+                                                <app-calories></app-calories>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 lg:col-6">
+                        <div class="  p-grid p-justify-center p-align-center">
+                            <div class="p-col-12 p-md-6 p-lg-6">
+                                <div class="card header  p-2 shadow-2 border-round" style="height: 50rem;">
+                                    <h4 class="m-5">Top MFTs</h4>
+                                    <div class="card flex justify-content-center">
+                                        
+                                        <p-organizationChart [value]="data">
+                                            <ng-template let-node pTemplate="default">
+                                                <div class="p-2 text-center mt-5">
+                                                    <img src="https://primefaces.org/cdn/primeng/images/flag/flag_placeholder.png" [alt]="node.label" [class]="'flag' + ' flag-' + node.data.country" width="32" />
+                                                    
+                                                    <div class="p-1">{{ node.label }}</div>
+                                                    <div class="p-1">{{ node.data.steps }} steps</div>
+                                                    
+                                                </div>
+                                            </ng-template>
+                                        </p-organizationChart>
+                                    </div>
+
+                                </div>
+                                    
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+                
+
+            </div>
+
+
+        </p-tabPanel>
+        <p-tabPanel header="Header II">
+            <ng-template pTemplate="header">
+                <i class="pi pi-user mr-2"></i>
+                <span>Following</span>
+            </ng-template>
+
+            <div class="card" style="height: 50rem;" >
+                <p-table
+                    #following
+                    [value]="followings"
+                    [(selection)]="selectedCustomers"
+                    dataKey="id"
+                    [rowHover]="true"
+                    [rows]="10"
+                    [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[10]"
+                    [loading]="loading"
+                    [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [filterDelay]="0"
+                    [globalFilterFields]="['name']"
+                    
+                >
+                    <ng-template pTemplate="caption">
+                        <div class="table-header">
+                            <h3>Following</h3>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="following.filterGlobal($event.target.value, 'contains')" placeholder="Search your Friends" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="name" style="width:45%">
+                                <div >
+                                    Name
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="steps" style="width:30%">
+                                <div >
+                                    Steps
+                                    <p-sortIcon field="steps"></p-sortIcon>
+                                </div>
+                            </th>
+            
+                            <th pSortableColumn="calories" style="width:30%">
+                                <div >
+                                    Calories
+                                    <p-sortIcon field="balance"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th style="width: 5rem"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-following>
+                        <tr class="p-selectable-row">
+                            <td>
+                                <span class="p-column-title">Name</span>
+                                {{ following.name }}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Steps</span>
+                                <span class="ml-1 vertical-align-middle">{{ following.steps }}</span>
+                            </td>
+
+                            <td>
+                                <span class="p-column-title">Calories</span>
+                                {{ following.calories }}
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">No customers found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-tabPanel>
+        <p-tabPanel header="Header III">
+            <ng-template pTemplate="header">
+                <i class="pi pi-users mr-2"></i>
+                <span>Followers</span>
+            </ng-template>
+
+            <div class="card" style="height: 50rem;" >
+                <p-table
+                    #followerss
+                    [value]="followers"
+                    [(selection)]="selectedCustomers"
+                    dataKey="id"
+                    [rowHover]="true"
+                    [rows]="10"
+                    [showCurrentPageReport]="true"
+                    [rowsPerPageOptions]="[10]"
+                    [loading]="loading"
+                    [paginator]="true"
+                    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                    [filterDelay]="0"
+                    [globalFilterFields]="['name']"
+                    
+                >
+                    <ng-template pTemplate="caption">
+                        <div class="table-header">
+                            <h3>Followers</h3>
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search"></i>
+                                <input pInputText type="text" (input)="followerss.filterGlobal($event.target.value, 'contains')" placeholder="Search your Followers" />
+                            </span>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pSortableColumn="name" style="width:45%">
+                                <div >
+                                    Name
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th pSortableColumn="steps" style="width:30%">
+                                <div >
+                                    Steps
+                                    <p-sortIcon field="steps"></p-sortIcon>
+                                </div>
+                            </th>
+             
+                            <th pSortableColumn="calories" style="width:30%">
+                                <div >
+                                    Calories
+                                    <p-sortIcon field="balance"></p-sortIcon>
+                                </div>
+                            </th>
+                            <th style="width: 5rem"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-follower>
+                        <tr class="p-selectable-row">
+                            <td>
+                                <span class="p-column-title">Name</span>
+                                {{ follower.name }}
+                            </td>
+                            <td>
+                                <span class="p-column-title">Steps</span>
+                                <span class="ml-1 vertical-align-middle">{{ follower.steps }}</span>
+                            </td>
+            
+                            <td>
+                                <span class="p-column-title">Calories</span>
+                                {{ follower.calories }}
+                            </td>
+            
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                        <tr>
+                            <td colspan="8">No customers found.</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </p-tabPanel>
+
+        <p-tabPanel header="Header IV">
+            <ng-template pTemplate="header">
+                <i class="pi pi-search mr-2"></i>
+                <span>Find Friends</span>
+            </ng-template>      
+            <div class="m-5">
+                <input type="text" style= "width: 75vw; height: 3rem; border-radius: 5px; " (keyup.enter)="onEnter(searchInput.value)" #searchInput placeholder="     Search for new friends by their name or miracle id " />
+                <!-- In your component.html -->
+            
+
+            </div>   
+                <div class="card" style="height: 50rem;" >
+                    <p-table
+                        #searchResults
+                        [value]="users"
+                        [(selection)]="selectedUsers"
+                        dataKey="id"
+                        [rowHover]="true"
+                        [rows]="8"
+                        [showCurrentPageReport]="true"
+                        [rowsPerPageOptions]="[8]"
+                        [loading]="loading"
+                        [paginator]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [filterDelay]="0"
+                        [globalFilterFields]="['name']"
+                    >
+                        <ng-template pTemplate="caption">
+                            <div class="table-header">
+                                <h3>Find Friends</h3>
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search"></i>
+                                    <input pInputText type="text" (input)="searchResults.filterGlobal($event.target.value, 'contains')" placeholder="Search results" />
+                                </span>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="name" style="width:45%">
+                                    <div >
+                                        Name
+                                        <p-sortIcon field="name"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th pSortableColumn="steps" style="width:30%">
+                                    <div >
+                                        Email
+                                        <p-sortIcon field="steps"></p-sortIcon>
+                                    </div>
+                                </th> 
+                 
+                                <th pSortableColumn="calories" style="width:30%">
+                                    <div >
+                                        Action
+                                        <p-sortIcon field="balance"></p-sortIcon>
+                                    </div>
+                                </th>
+                                <th style="width: 5rem"></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-user>
+                            <tr class="p-selectable-row">
+                                <td>
+                                    <span class="p-column-title">Name</span>
+                                    {{ user.name }}
+                                </td>
+                                <td>
+                                    <span class="p-column-title">Email</span>
+                                    <span class="ml-1 vertical-align-middle">{{ user.email1 }}</span>
+                                </td>
+                
+                                <td>
+                                    <span class="p-column-title">Action</span>
+                                    <button *ngIf="user.email1" (click)="toggleFollow(user)" pButton type="button" 
+                                    [label]="user.isFollowing ? 'Following' : 'Follow'" 
+                                    [ngClass]="{'following-button': user.isFollowing}" style="font-size: 12px;">
+                            </button>
+                                </td>
+                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td colspan="8"  > No results found.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            
+        </p-tabPanel>
+    </p-tabView>
+</div>

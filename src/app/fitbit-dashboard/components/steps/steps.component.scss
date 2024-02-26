@@ -1,0 +1,41 @@
+.chart-nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .chart-nav-icon {
+    // font-size: 34px;
+    cursor: pointer;
+  }
+  
+  .disabled-icon {
+    color: #ccc; /* Change the color for disabled icon */
+    cursor: not-allowed;
+  }
+  
+  .custom-dropdown {
+    display: flex;
+    align-items: end;
+  }
+  .chart-type-selectors {
+    i {
+      cursor: pointer;
+      margin: 0 10px;
+      color: #777; // Default icon color
+    }
+  
+    .selected-chart {
+      color: #000; // Highlight the selected icon
+    }
+  }
+
+
+  .no-data-available {
+    position: absolute;
+    top: 49%;
+    right: 45%;
+  }
+  
+  
